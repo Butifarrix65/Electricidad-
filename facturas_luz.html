@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Facturas luz">
+<meta name="theme-color" content="#14213d">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAACVUlEQVR42u3d0ZHiMBREUawiBAeAA3FIRENIJEIofFPFp209qc8NYfZsP7E1M7us236T/tV8CQSH4BAcgkNwCA7BITgEh+CQ4BAcgkNwCA7BITgEh+DQT5/XGw6FyoBDcJwwG4/nDocSDwocgsNswEEGHIKj9mwkfFSBQ3B4bcBBBhyCo+pshLxG4XBQ4BAcZgMOMuAQHGPNRs5HFTgcFDgEh9mAgww4BMdAsxH1UQUOBwUOwWE24BAcxWYj7TUajcNBgUNwmA04yIBDcIwzG4EfVeJwOChwCA6zAQcZcNQt8zWagsNswEEGHILDbMBBBhw+qsBhNuAQHGYDDjLkrCgbx7GzkfxRZTYcDsqx3X0JimgruFLNH2SFat6vRoZ8WjEbkTgcFDgcFDgcFDjMRv1/YWtkyFkxGzE4HBQ4HBQ4HBQ4zMZY3wNgOTQLDrMBBxlwCA6zMej3ojYyyHBWNCMOswEHGXAIDrMxwU/LLeu2h//9OIPgHD9H6awIDrMBh6cGHILDbMBBBhwRr1E4NP9swEEGHILDbMBR6DU69++itByCw0GBgww4BEfV12jI70S3HGTAITjMBhxkwFHyNQqH0mcDDjLgEBxmA45LX6P+L3sJDgcFDjLgEBw9XqNmw3KQAYfgMBtwkAFHv9eoLIfZgIMMOASH2YDjwtcoGZZDcDgocJABh+Do8Ro1G3A4KHAIDrMBBxlw9HuNCg6zAQcZcAgOswHHha9RMuAQHA7KVfm/7OWsCA7BITgEh+AQHIJDcAgOCQ7BITgEh+AQHIJDcGjavr7Dy76l0icLAAAAAElFTkSuQmCC">
+<title>Facturas de luz</title>
+<style>
+:root{--bg:#f3f5f9;--card:#fff;--tx:#14213d;--mu:#64708a;--ac:#14213d;--on:#fff;--hl:#f4b400;--ok:#e3f4e1;--bd:#dde2ec;--er:#b3261e;
+ color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1420;--card:#18202f;--tx:#e8ecf5;--mu:#9aa6bf;--ac:#f4b400;--on:#14213d;--ok:#1f3a27;--bd:#2a3550;--er:#ff8a80}}
+:root[data-theme="dark"]{--bg:#0e1420;--card:#18202f;--tx:#e8ecf5;--mu:#9aa6bf;--ac:#f4b400;--on:#14213d;--ok:#1f3a27;--bd:#2a3550;--er:#ff8a80}
+*,*::before,*::after{box-sizing:inherit}
+body::before{content:"";position:fixed;top:0;left:0;right:0;height:env(safe-area-inset-top,0px);background:#14213d;z-index:10}
+html,body{margin:0}
+body{background:var(--bg);color:var(--tx);font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;-webkit-text-size-adjust:100%}
+main{max-width:720px;margin:0 auto;padding:14px 14px 88px}
+h1{font-size:22px;margin:4px 0 2px}
+.sub{color:var(--mu);font-size:14px;margin:0 0 12px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;margin-bottom:12px}
+label{display:block;font-size:13px;color:var(--mu);margin:10px 0 3px}
+input,select,textarea{width:100%;font:inherit;color:var(--tx);background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:10px;min-height:44px}
+.row{display:flex;gap:10px}.row>*{flex:1;min-width:0}
+button{font:inherit;font-weight:600;border:0;border-radius:10px;padding:11px 14px;min-height:44px;background:var(--ac);color:var(--on)}
+button.s{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.btns{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.tot{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.tot b{font-size:30px}
+.mu{color:var(--mu);font-size:13px}
+table{width:100%;border-collapse:collapse;font-size:14px}
+td,th{padding:7px 6px;text-align:right;border-bottom:1px solid var(--bd);white-space:nowrap}
+td:first-child,th:first-child{text-align:left;white-space:normal}
+tr.h td{font-weight:700;background:var(--bg)}
+tr.best td{background:var(--ok)}
+td small{display:block;color:var(--mu);font-weight:400;white-space:normal}
+.sc{overflow-x:auto}
+.item{display:flex;justify-content:space-between;gap:10px;padding:11px 0;border-bottom:1px solid var(--bd)}
+.item:last-child{border-bottom:0}
+.item[role=button]{cursor:pointer}
+.err{color:var(--er)}
+nav{position:fixed;left:0;right:0;bottom:0;display:flex;background:var(--card);border-top:1px solid var(--bd);padding-bottom:env(safe-area-inset-bottom,0px)}
+nav button{flex:1;background:transparent;color:var(--mu);border-radius:0;font-size:13px;padding:10px 2px;border-top:3px solid transparent}
+nav button.on{color:var(--tx);border-top-color:var(--hl)}
+#toast{position:fixed;left:50%;bottom:calc(70px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:10px 14px;border-radius:10px;font-size:14px;max-width:90%;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.on{opacity:1}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+<section id="v-factura">
+ <h1>Factura</h1><p class="sub">Calcula una factura con la comercializadora que elijas.</p>
+ <div class="card">
+  <label for="emp">Comercializadora</label><select id="emp"></select>
+  <div class="row"><div><label for="pot">Potencia (kW)</label><input id="pot" inputmode="decimal" value="5"></div>
+  <div><label for="kwh">Consumo (kWh)</label><input id="kwh" inputmode="decimal" placeholder="210"></div></div>
+  <div class="row"><div><label for="ini">Desde</label><input id="ini" type="date"></div>
+  <div><label for="fin">Hasta</label><input id="fin" type="date"></div></div>
+  <p class="mu" id="dias">Días facturados: —</p>
+  <div class="btns"><button id="b-calc">Calcular</button><button id="b-arch" class="s" disabled>Guardar en archivo</button></div>
+ </div>
+ <div class="card" id="res" hidden>
+  <div class="tot"><span>Total factura</span><b id="r-tot"></b></div>
+  <div class="sc"><table id="r-tab"></table></div>
+ </div>
+</section>
+
+<section id="v-comp" hidden>
+ <h1>Comparativa</h1><p class="sub">Estimación con todas las comercializadoras y los datos de la pestaña Factura.</p>
+ <div id="c-msg" class="mu"></div>
+ <div class="card" id="c-kpi" hidden>
+  <div class="mu">Mejor precio</div><div class="tot"><b id="c-best" style="font-size:22px"></b><b id="c-bt" style="font-size:22px"></b></div>
+  <div class="mu" id="c-save"></div>
+ </div>
+ <div class="card sc" id="c-card" hidden><table id="c-tab"></table></div>
+</section>
+
+<section id="v-emp" hidden>
+ <h1>Comercializadoras</h1><p class="sub" id="e-count"></p>
+ <div class="card" id="e-list"></div>
+ <div class="card">
+  <label for="e-nom">Nombre</label><input id="e-nom" autocapitalize="words">
+  <div class="row"><div><label for="e-tar">Tarifa (€/kWh)</label><input id="e-tar" inputmode="decimal"></div></div>
+  <div class="row"><div><label for="e-p1">Punta P1 (€/kW día)</label><input id="e-p1" inputmode="decimal"></div>
+  <div><label for="e-p2">Valle P2 (€/kW día)</label><input id="e-p2" inputmode="decimal"></div></div>
+  <p class="mu" id="e-hint">Toca una empresa de la lista para modificarla. El nombre no se puede cambiar.</p>
+  <div class="btns"><button id="b-add">Añadir</button><button id="b-save" class="s">Guardar cambios</button>
+  <button id="b-del" class="s">Eliminar</button><button id="b-new" class="s">Nueva</button></div>
+ </div>
+</section>
+
+<section id="v-arch" hidden>
+ <h1>Archivo</h1><p class="sub" id="a-count"></p>
+ <div class="card" id="a-list"></div>
+ <div class="card" id="a-det" hidden><div class="sc"><table id="a-tab"></table></div>
+  <div class="btns"><button id="b-adel" class="s">Eliminar del archivo</button></div></div>
+ <details class="card"><summary>Copia de seguridad</summary>
+  <p class="mu">Los datos viven solo en este navegador. Copia el texto y guárdalo en Notas, o pega aquí una copia para recuperarla.</p>
+  <textarea id="bk" rows="5" spellcheck="false"></textarea>
+  <div class="btns"><button id="b-gen" class="s">Generar y copiar</button><button id="b-imp" class="s">Importar texto</button></div>
+ </details>
+</section>
+</main>
+
+<nav>
+ <button id="t-factura" class="on">Factura</button><button id="t-comp">Comparativa</button>
+ <button id="t-emp">Empresas</button><button id="t-arch">Archivo</button>
+</nav>
+<div id="toast" role="status"></div>
+
+<script>
+const K={bono:0.024688,alq:0.83,iee:0.0511269632,iva:0.21};
+const KEY="facturasLuz.v1";
+const INI=[{nombre:"Repsol",tarifa:0.0999,punta:0.081917808,valle:0.081917808},
+ {nombre:"Naturgy",tarifa:0.112,punta:0.12303,valle:0.061562},
+ {nombre:"Iberdrola",tarifa:0.111129,punta:0.1081,valle:0.0575}];
+let db={empresas:INI.map(e=>({...e})),facturas:[]};
+let actual=null, editando=null, selArch=null;
+const $=i=>document.getElementById(i);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function load(){try{const s=localStorage.getItem(KEY);if(s){const d=JSON.parse(s);if(Array.isArray(d.empresas)&&Array.isArray(d.facturas))db=d}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(db))}catch(e){}}
+
+const num=(v,d=2)=>v.toLocaleString("es-ES",{minimumFractionDigits:d,maximumFractionDigits:d});
+const eur=v=>num(v)+" €";
+const prec=v=>String(+v.toFixed(9)).replace(".",",");
+const tr=v=>num(v).replace(/,?0+$/,"");
+const fdate=s=>s.split("-").reverse().join("/");
+function rd(s,n){const t=String(s).trim().replace(/\s/g,"");if(!t)throw new Error("Falta "+n+".");
+ const v=Number(t.includes(",")?t.replace(/\./g,"").replace(",","."):t);
+ if(!isFinite(v))throw new Error("«"+s+"» no es un número válido para "+n+".");return v}
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2800)}
+function dos(btn,txt,fn){if(btn.dataset.arm){clearTimeout(btn._t);delete btn.dataset.arm;btn.textContent=btn.dataset.o;fn();return}
+ btn.dataset.o=btn.textContent;btn.dataset.arm=1;btn.textContent=txt;
+ btn._t=setTimeout(()=>{delete btn.dataset.arm;btn.textContent=btn.dataset.o},3000)}
+const buscar=n=>db.empresas.find(e=>e.nombre.toLowerCase()===String(n).trim().toLowerCase());
+const dias=(a,b)=>{const d=Math.round((new Date(b)-new Date(a))/864e5);if(!(d>0))throw new Error("La fecha final debe ser posterior a la inicial.");return d};
+
+function calcular(e,pot,ini,fin,kwh){
+ const d=dias(ini,fin);if(pot<=0)throw new Error("La potencia debe ser mayor que 0.");if(kwh<0)throw new Error("El consumo no puede ser negativo.");
+ const p1=pot*d*e.punta,p2=pot*d*e.valle,fijo=p1+p2,ener=kwh*e.tarifa,bono=d*K.bono,otros=bono+K.alq;
+ const baseI=fijo+ener+bono,iee=baseI*K.iee,baseV=fijo+ener+otros+iee,iva=baseV*K.iva;
+ return{empresa:e.nombre,tarifa:e.tarifa,punta:e.punta,valle:e.valle,potencia:pot,inicio:ini,fin,dias:d,consumo:kwh,
+  p1,p2,fijo,ener,bono,alq:K.alq,otros,baseI,iee,baseV,iva,imp:iee+iva,total:baseV+iva}}
+function desglose(f){const p=tr(f.potencia);return[
+ [0,"Término fijo",f.fijo,""],
+ [1,"Periodo 1",f.p1,`${p} kW x ${f.dias} días x ${prec(f.punta)} €/kW día`],
+ [1,"Periodo 2",f.p2,`${p} kW x ${f.dias} días x ${prec(f.valle)} €/kW día`],
+ [0,"Energía",f.ener,""],
+ [1,"Consumo",f.ener,`${tr(f.consumo)} kWh x ${prec(f.tarifa)} €/kWh`],
+ [0,"Otros conceptos",f.otros,""],
+ [1,"Financiación Bono Social",f.bono,`${f.dias} días x ${prec(K.bono)} €/día`],
+ [1,"Alquiler de contador",f.alq,""],
+ [0,"Impuestos",f.imp,""],
+ [1,"Impuesto Eléctrico",f.iee,`${num(f.baseI,5)} x 5,11269632%`],
+ [1,"IVA (21 %)",f.iva,`IVA (21 %) de ${num(f.baseV)}`],
+ [0,"Total factura",f.total,""]]}
+function tablaDesglose(t,f){t.innerHTML=desglose(f).map(([n,c,i,k])=>
+ `<tr class="${n?"":"h"}"><td>${n?"&nbsp;&nbsp;&nbsp;":""}${esc(c)}${k?`<small>${esc(k)}</small>`:""}</td><td>${eur(i)}</td></tr>`).join("")}
+function comparar(pot,d,kwh){
+ const filas=[...db.empresas].sort((a,b)=>a.nombre.localeCompare(b.nombre,"es")).map(e=>{
+  const fijo=pot*d*(e.punta+e.valle),ener=kwh*e.tarifa,bono=d*K.bono,otros=bono+K.alq,
+  iee=(fijo+ener+bono)*K.iee,iva=(fijo+ener+otros+iee)*K.iva;
+  return{nombre:e.nombre,fijo,ener,otros,iee,iva,total:fijo+ener+otros+iee+iva}});
+ if(!filas.length)return{filas,mejor:null,ahorro:0};
+ const min=Math.min(...filas.map(f=>f.total)),max=Math.max(...filas.map(f=>f.total));
+ filas.forEach(f=>f.dif=f.total-min);
+ return{filas,mejor:filas.find(f=>f.total===min),ahorro:max-min}}
+
+function leer(conEmp){
+ let e=null;if(conEmp){e=buscar($("emp").value);if(!e)throw new Error("Elige una comercializadora.")}
+ const pot=rd($("pot").value,"la potencia"),kwh=rd($("kwh").value,"el consumo"),ini=$("ini").value,fin=$("fin").value;
+ if(!ini||!fin)throw new Error("Indica las fechas inicial y final.");
+ return{e,pot,kwh,ini,fin}}
+
+/* ---------- pestañas ---------- */
+const TABS=["factura","comp","emp","arch"];
+function show(n){TABS.forEach(x=>{$("v-"+x).hidden=x!==n;$("t-"+x).classList.toggle("on",x===n)});
+ if(n==="comp")renderComp();window.scrollTo(0,0)}
+TABS.forEach(x=>$("t-"+x).onclick=()=>show(x));
+
+/* ---------- factura ---------- */
+function actualizaDias(){try{$("dias").textContent="Días facturados: "+dias($("ini").value,$("fin").value)}catch(e){$("dias").textContent="Días facturados: —"}}
+$("ini").onchange=$("fin").onchange=actualizaDias;
+$("b-calc").onclick=()=>{try{const i=leer(true);actual=calcular(i.e,i.pot,i.ini,i.fin,i.kwh)}catch(e){toast(e.message);return}
+ $("res").hidden=false;$("r-tot").textContent=eur(actual.total);tablaDesglose($("r-tab"),actual);$("b-arch").disabled=false};
+$("b-arch").onclick=function(){if(!actual)return;
+ const ya=db.facturas.find(f=>f.inicio===actual.inicio&&f.fin===actual.fin);
+ const hacer=()=>{db.facturas=db.facturas.filter(f=>f!==ya);db.facturas.push({...actual});db.facturas.sort((a,b)=>a.inicio.localeCompare(b.inicio));save();renderArch();toast("Factura guardada en el archivo.")};
+ ya?dos(this,"Ya existe: toca para sustituir",hacer):hacer()};
+
+/* ---------- comparativa ---------- */
+function renderComp(){
+ const msg=$("c-msg"),k=$("c-kpi"),c=$("c-card");k.hidden=c.hidden=true;
+ let i,d;try{i=leer(false);d=dias(i.ini,i.fin)}catch(e){msg.className="mu err";msg.textContent="Completa potencia, fechas y consumo en la pestaña Factura. "+e.message;return}
+ msg.className="mu";msg.textContent=`${tr(i.pot)} kW · ${fdate(i.ini)} a ${fdate(i.fin)} · ${d} días · ${tr(i.kwh)} kWh`;
+ const r=comparar(i.pot,d,i.kwh);if(!r.mejor){msg.textContent="No hay comercializadoras registradas.";return}
+ k.hidden=c.hidden=false;$("c-best").textContent=r.mejor.nombre;$("c-bt").textContent=eur(r.mejor.total);
+ $("c-save").textContent="Ahorro máximo entre la más cara y la más barata: "+eur(r.ahorro);
+ $("c-tab").innerHTML="<tr><th>Empresa</th><th>Fijo</th><th>Energía</th><th>Otros</th><th>Imp. eléc.</th><th>IVA</th><th>Total</th><th>Dif.</th></tr>"+
+  r.filas.map(f=>`<tr class="${f===r.mejor?"best":""}"><td>${esc(f.nombre)}</td><td>${eur(f.fijo)}</td><td>${eur(f.ener)}</td><td>${eur(f.otros)}</td><td>${eur(f.iee)}</td><td>${eur(f.iva)}</td><td><b>${eur(f.total)}</b></td><td>${eur(f.dif)}</td></tr>`).join("")}
+
+/* ---------- empresas ---------- */
+function renderEmp(){
+ const n=db.empresas.length;$("e-count").textContent=n+(n===1?" comercializadora registrada":" comercializadoras registradas");
+ $("e-list").innerHTML=n?db.empresas.map(e=>`<div class="item" role="button" tabindex="0" data-n="${esc(e.nombre)}"><b>${esc(e.nombre)}</b>
+  <span class="mu">${prec(e.tarifa)} · P1 ${prec(e.punta)} · P2 ${prec(e.valle)}</span></div>`).join(""):'<p class="mu">Añade tu primera comercializadora abajo.</p>';
+ const sel=$("emp"),v=sel.value;sel.innerHTML=[...db.empresas].sort((a,b)=>a.nombre.localeCompare(b.nombre,"es")).map(e=>`<option>${esc(e.nombre)}</option>`).join("");
+ if(buscar(v))sel.value=buscar(v).nombre}
+$("e-list").onclick=ev=>{const it=ev.target.closest(".item");if(!it)return;const e=buscar(it.dataset.n);if(!e)return;
+ editando=e.nombre;$("e-nom").value=e.nombre;$("e-nom").readOnly=true;$("e-tar").value=prec(e.tarifa);$("e-p1").value=prec(e.punta);$("e-p2").value=prec(e.valle)};
+function limpiaEmp(){editando=null;$("e-nom").readOnly=false;["e-nom","e-tar","e-p1","e-p2"].forEach(i=>$(i).value="")}
+function precios(){const v=[rd($("e-tar").value,"la tarifa"),rd($("e-p1").value,"el precio Punta (P1)"),rd($("e-p2").value,"el precio Valle (P2)")];
+ if(v.some(x=>x<0))throw new Error("Los precios no pueden ser negativos.");return v}
+$("b-add").onclick=()=>{try{const nom=$("e-nom").value.trim();if(!nom)throw new Error("El nombre es obligatorio.");
+ if(buscar(nom))throw new Error("Ya existe «"+nom+"».");const [t,a,b]=precios();
+ db.empresas.push({nombre:nom,tarifa:t,punta:a,valle:b});save();limpiaEmp();renderEmp();toast("Añadida.")}catch(e){toast(e.message)}};
+$("b-save").onclick=()=>{try{if(!editando)throw new Error("Toca primero una empresa de la lista.");
+ const e=buscar(editando),[t,a,b]=precios();Object.assign(e,{tarifa:t,punta:a,valle:b});save();renderEmp();toast("Cambios guardados.")}catch(e){toast(e.message)}};
+$("b-del").onclick=function(){if(!editando){toast("Toca primero una empresa de la lista.");return}
+ dos(this,"¿Seguro? Toca otra vez",()=>{db.empresas=db.empresas.filter(e=>e.nombre!==editando);save();limpiaEmp();renderEmp();toast("Eliminada.")})};
+$("b-new").onclick=limpiaEmp;
+
+/* ---------- archivo ---------- */
+function renderArch(){
+ const n=db.facturas.length,tot=db.facturas.reduce((s,f)=>s+f.total,0);
+ $("a-count").textContent=n?`${n} factura${n===1?"":"s"} · suma ${eur(tot)}`:"Archivo vacío. Guarda facturas desde la pestaña Factura.";
+ $("a-list").hidden=!n;
+ $("a-list").innerHTML=db.facturas.map((f,i)=>`<div class="item" role="button" tabindex="0" data-i="${i}"><span><b>${fdate(f.inicio)} a ${fdate(f.fin)}</b><br><span class="mu">${esc(f.empresa)} · ${tr(f.consumo)} kWh</span></span><b>${eur(f.total)}</b></div>`).join("");
+ if(selArch!==null&&db.facturas[selArch]){tablaDesglose($("a-tab"),db.facturas[selArch]);$("a-det").hidden=false}else{selArch=null;$("a-det").hidden=true}}
+$("a-list").onclick=ev=>{const it=ev.target.closest(".item");if(!it)return;selArch=+it.dataset.i;renderArch()};
+$("b-adel").onclick=function(){if(selArch===null)return;
+ dos(this,"¿Seguro? Toca otra vez",()=>{db.facturas.splice(selArch,1);selArch=null;save();renderArch();toast("Eliminada del archivo.")})};
+$("b-gen").onclick=async()=>{const t=JSON.stringify(db);$("bk").value=t;
+ try{await navigator.clipboard.writeText(t);toast("Copiado al portapapeles.")}catch(e){$("bk").select();toast("Selecciona el texto y cópialo.")}};
+$("b-imp").onclick=()=>{try{const d=JSON.parse($("bk").value);
+ if(!Array.isArray(d.empresas)||!Array.isArray(d.facturas))throw new Error("x");
+ db={empresas:d.empresas,facturas:d.facturas};save();selArch=null;renderEmp();renderArch();toast("Datos importados.")}
+ catch(e){toast("El texto no es una copia válida.")}};
+
+load();renderEmp();renderArch();
+</script>
+</body>
+</html>
